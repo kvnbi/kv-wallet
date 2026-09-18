@@ -1,0 +1,15 @@
+{
+  "name": "@kv-wallet/extension",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MPL-2.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc --build"
+  },
+  "dependencies": {
+    "@kv-wallet/decoder": "*",
+    "@kv-wallet/provider": "*",
+    "@kv-wallet/signer": "*"
+  }
+}
