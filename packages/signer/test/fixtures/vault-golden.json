@@ -1,0 +1,14 @@
+{
+  "source": "Constructed on 2026-09-19 by an independent script that lays out the header byte by byte from the documented format and encrypts with the node:crypto createCipheriv API, which does not go through WebCrypto. It pins the envelope layout, the associated data binding and the tag position.",
+  "key": "0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+  "salt": "0xa0a1a2a3a4a5a6a7a8a9aaabacadaeaf",
+  "nonce": "0xb0b1b2b3b4b5b6b7b8b9babb",
+  "parameters": {
+    "memoryKiB": 65536,
+    "iterations": 3,
+    "parallelism": 1
+  },
+  "secretUtf8": "test test test test test test test test test test test junk",
+  "header": "0x4b56570101000100000000000301a0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babb",
+  "vault": "0x4b56570101000100000000000301a0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babb996e2ece9fb99b2b228be382b938fbb6a4482ca1610efb502dbaa28539f18636712e504e43aac3cbd17bd42f4fcda2c1481e63e76f5e31846de0195e6f9b20ffb2e83eb40abc66da19dca25e9e06e2314690c9b2a87875ddf5fb78902b590fbf63a07e5bced736165e4e1adc92dac0800db6b79773f3cd3a7807f7d91e0e2f2249ada78e030e932e62550d262c1f311b83bd44d0cb63431db1f123dd49c1fc94f2d2c1fc3f675531f01b43b24d44ebb1325010b19cee41bc55134b818083895e5dd7a4f0f507448b28346cd907602d95ca2986705e362dc453364095c335e91c7a00897790f10e643315864da1419a4897ca4107a63956a7d0f9520697b54542ad2cae56374b33a82982c0c357c3606b"
+}

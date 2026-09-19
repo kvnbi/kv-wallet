@@ -11,6 +11,7 @@ export type { Hex } from './bytes.ts'
 export type { Signature } from './ecdsa.ts'
 export type { AccessListEntry, Eip1559Transaction, LegacyTransaction, Transaction } from './transaction.ts'
 export type { TypedData, TypedDataField, TypedDataTypes } from './typed-data.ts'
+export type { VaultHeader, VaultKey, VaultParameters } from './vault.ts'
 
 export { derivationPath } from './derivation.ts'
 export { serializeSignature } from './ecdsa.ts'
@@ -18,6 +19,7 @@ export { generateMnemonic, mnemonicToSeed, validateMnemonic } from './mnemonic.t
 export { hashPersonalMessage } from './personal.ts'
 export { transactionSigningHash } from './transaction.ts'
 export { hashTypedData } from './typed-data.ts'
+export { createVaultSalt, openVault, readVaultHeader, sealVault, VAULT_PARAMETERS } from './vault.ts'
 
 export function deriveAddress(seed: Uint8Array, index: number): Address {
   return withPrivateKey(seed, index, privateKeyToAddress)
