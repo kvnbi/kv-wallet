@@ -19,9 +19,11 @@ const tx = transaction((mainnet.cases as any[]).find(c => c.transaction.type ===
 test('the public surface is exactly the reviewed set, with no way to sign a raw digest', () => {
   assert.deepEqual(Object.keys(signer).sort(), [
     'VAULT_PARAMETERS',
+    'createVaultKey',
     'createVaultSalt',
     'derivationPath',
     'deriveAddress',
+    'deriveVaultKey',
     'generateMnemonic',
     'hashPersonalMessage',
     'hashTypedData',
@@ -35,6 +37,7 @@ test('the public surface is exactly the reviewed set, with no way to sign a raw 
     'signTypedData',
     'transactionSigningHash',
     'validateMnemonic',
+    'vaultKeyFor',
   ])
 })
 

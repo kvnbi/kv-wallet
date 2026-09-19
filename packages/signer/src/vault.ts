@@ -108,7 +108,7 @@ export function readVaultHeader(vault: Uint8Array): VaultHeader {
   return { version, kdf: 'argon2id', parameters, salt: vault.slice(14, 30), nonce: vault.slice(30, 42) }
 }
 
-function assertParameters(parameters: VaultParameters): void {
+export function assertParameters(parameters: VaultParameters): void {
   const { memoryKiB, iterations, parallelism } = parameters
   bound('memoryKiB', memoryKiB, MEMORY_MIN, MEMORY_MAX)
   bound('iterations', iterations, ITERATIONS_MIN, ITERATIONS_MAX)

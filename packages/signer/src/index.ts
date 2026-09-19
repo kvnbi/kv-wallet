@@ -19,6 +19,7 @@ export { generateMnemonic, mnemonicToSeed, validateMnemonic } from './mnemonic.t
 export { hashPersonalMessage } from './personal.ts'
 export { transactionSigningHash } from './transaction.ts'
 export { hashTypedData } from './typed-data.ts'
+export { createVaultKey, deriveVaultKey, vaultKeyFor } from './kdf.ts'
 export { createVaultSalt, openVault, readVaultHeader, sealVault, VAULT_PARAMETERS } from './vault.ts'
 
 export function deriveAddress(seed: Uint8Array, index: number): Address {
