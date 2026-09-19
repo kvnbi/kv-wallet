@@ -11,6 +11,8 @@
     "noFallthroughCasesInSwitch": true,
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
+    "erasableSyntaxOnly": true,
+    "rewriteRelativeImportExtensions": true,
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,

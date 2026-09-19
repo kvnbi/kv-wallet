@@ -1,0 +1,530 @@
+{
+  "source": "Generated on 2026-09-19 by two independent reference implementations, @metamask/eth-sig-util 9.0.0 using SignTypedDataVersion.V4 and ethers 6.17.0 using TypedDataEncoder. A case is kept only if both produce identical encodeType, messageHash, domainSeparator and digest. specSorting also reproduces the encodeType example printed in the EIP-712 specification. recursiveTypeEncoding is an inline snapshot from the eth-sig-util encodeType tests.",
+  "cases": {
+    "specSorting": {
+      "note": "The encodeType example given verbatim in the EIP-712 specification text. Person is discovered before Asset, so only a sorted encoding matches.",
+      "typedData": {
+        "types": {
+          "EIP712Domain": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "version",
+              "type": "string"
+            },
+            {
+              "name": "chainId",
+              "type": "uint256"
+            },
+            {
+              "name": "verifyingContract",
+              "type": "address"
+            }
+          ],
+          "Transaction": [
+            {
+              "name": "from",
+              "type": "Person"
+            },
+            {
+              "name": "to",
+              "type": "Person"
+            },
+            {
+              "name": "tx",
+              "type": "Asset"
+            }
+          ],
+          "Asset": [
+            {
+              "name": "token",
+              "type": "address"
+            },
+            {
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "Person": [
+            {
+              "name": "wallet",
+              "type": "address"
+            },
+            {
+              "name": "name",
+              "type": "string"
+            }
+          ]
+        },
+        "primaryType": "Transaction",
+        "domain": {
+          "name": "Test",
+          "version": "1",
+          "chainId": 1,
+          "verifyingContract": "0x1111111111111111111111111111111111111111"
+        },
+        "message": {
+          "from": {
+            "wallet": "0x2222222222222222222222222222222222222222",
+            "name": "Alice"
+          },
+          "to": {
+            "wallet": "0x3333333333333333333333333333333333333333",
+            "name": "Bob"
+          },
+          "tx": {
+            "token": "0x4444444444444444444444444444444444444444",
+            "amount": "1000000000000000000"
+          }
+        }
+      },
+      "encodeType": "Transaction(Person from,Person to,Asset tx)Asset(address token,uint256 amount)Person(address wallet,string name)",
+      "messageHash": "0x06f807023cd5eefb82d1fae74a1a3b5c6c2a45e5d2557f4c3d6f5a3cacc8c14b",
+      "domainSeparator": "0xd717ce1a97ca2ad8ef9064c7849d0433f7e71eb27c458e5d7c709c1a25730525",
+      "digest": "0xdead17706b67d0666e240c21a825523d691a799dbb571f7c0139d6dfd6effb00"
+    },
+    "arrayOnlyDependency": {
+      "note": "Person is referenced only through Person[], so its definition is appended only if array suffixes are stripped when collecting dependencies.",
+      "typedData": {
+        "types": {
+          "EIP712Domain": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "version",
+              "type": "string"
+            },
+            {
+              "name": "chainId",
+              "type": "uint256"
+            }
+          ],
+          "Group": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "members",
+              "type": "Person[]"
+            }
+          ],
+          "Person": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "wallet",
+              "type": "address"
+            }
+          ]
+        },
+        "primaryType": "Group",
+        "domain": {
+          "name": "Groups",
+          "version": "2",
+          "chainId": 8453
+        },
+        "message": {
+          "name": "Core",
+          "members": [
+            {
+              "name": "A",
+              "wallet": "0x5555555555555555555555555555555555555555"
+            },
+            {
+              "name": "B",
+              "wallet": "0x6666666666666666666666666666666666666666"
+            }
+          ]
+        }
+      },
+      "encodeType": "Group(string name,Person[] members)Person(string name,address wallet)",
+      "messageHash": "0x4a11ea4bf5b46bd6cc3b7a7a93c549903d3c5a9d92b094bc0e1e381718bdadc8",
+      "domainSeparator": "0xdae436b76656f00431bb1bc3d8a6c2edf2e25156c0fb6a4a465150715b3e6f37",
+      "digest": "0xc6b17a36a98c61c81c204e6fe4fb174e2d2281926df5338442edb84a3ad74fa4"
+    },
+    "transitiveChain": {
+      "note": "Dependencies discovered in the order Item, Buyer, Location, one of them only transitively and one only through an array. The sorted order is Buyer, Item, Location.",
+      "typedData": {
+        "types": {
+          "EIP712Domain": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "chainId",
+              "type": "uint256"
+            },
+            {
+              "name": "verifyingContract",
+              "type": "address"
+            }
+          ],
+          "Order": [
+            {
+              "name": "items",
+              "type": "Item[]"
+            },
+            {
+              "name": "buyer",
+              "type": "Buyer"
+            }
+          ],
+          "Buyer": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "home",
+              "type": "Location"
+            }
+          ],
+          "Location": [
+            {
+              "name": "street",
+              "type": "string"
+            }
+          ],
+          "Item": [
+            {
+              "name": "sku",
+              "type": "string"
+            },
+            {
+              "name": "quantity",
+              "type": "uint256"
+            }
+          ]
+        },
+        "primaryType": "Order",
+        "domain": {
+          "name": "Shop",
+          "chainId": 42161,
+          "verifyingContract": "0x7777777777777777777777777777777777777777"
+        },
+        "message": {
+          "items": [
+            {
+              "sku": "a",
+              "quantity": 1
+            },
+            {
+              "sku": "b",
+              "quantity": 2
+            }
+          ],
+          "buyer": {
+            "name": "C",
+            "home": {
+              "street": "Main"
+            }
+          }
+        }
+      },
+      "encodeType": "Order(Item[] items,Buyer buyer)Buyer(string name,Location home)Item(string sku,uint256 quantity)Location(string street)",
+      "messageHash": "0xf00f94659d10b485f06aad3fd95492080f052b907723df0fd165d33cef0b4642",
+      "domainSeparator": "0x33aa35ff841dbbf531e94b0186aedc6aaf8479616ed2dcbbbe66c35d5e7811e6",
+      "digest": "0x0962dd6a924cc6264510e8d76e8a0f4ce4f5461acc6badefc949a782ac51e2ea"
+    },
+    "nestedAndFixedArrays": {
+      "note": "Nested dynamic arrays, fixed length arrays, and arrays of atomic types including negative integers and booleans.",
+      "typedData": {
+        "types": {
+          "EIP712Domain": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "version",
+              "type": "string"
+            },
+            {
+              "name": "chainId",
+              "type": "uint256"
+            }
+          ],
+          "Matrix": [
+            {
+              "name": "rows",
+              "type": "uint256[2][]"
+            },
+            {
+              "name": "tags",
+              "type": "bytes32[3]"
+            },
+            {
+              "name": "deltas",
+              "type": "int8[]"
+            },
+            {
+              "name": "flags",
+              "type": "bool[]"
+            },
+            {
+              "name": "empty",
+              "type": "address[]"
+            }
+          ]
+        },
+        "primaryType": "Matrix",
+        "domain": {
+          "name": "Arrays",
+          "version": "1",
+          "chainId": 10
+        },
+        "message": {
+          "rows": [
+            [
+              "1",
+              "2"
+            ],
+            [
+              "3",
+              "4"
+            ],
+            [
+              "5",
+              "6"
+            ]
+          ],
+          "tags": [
+            "0x0101010101010101010101010101010101010101010101010101010101010101",
+            "0x0202020202020202020202020202020202020202020202020202020202020202",
+            "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          ],
+          "deltas": [
+            -128,
+            -1,
+            0,
+            127
+          ],
+          "flags": [
+            true,
+            false,
+            true
+          ],
+          "empty": []
+        }
+      },
+      "encodeType": "Matrix(uint256[2][] rows,bytes32[3] tags,int8[] deltas,bool[] flags,address[] empty)",
+      "messageHash": "0x7d5bf4ffcfda6d09d648783ce6e3f8c3176add16696e6b10afdbfef939224298",
+      "domainSeparator": "0x6e54d18c59803b0b5d09312579762d63aa50eedf3447b94f0ce4b70c7d647a79",
+      "digest": "0xebffdd5b809b3b797848d4963167cc0c75bfccd30e0153648323a41d44f732ff"
+    },
+    "atomicEdges": {
+      "note": "Boundary values for signed and unsigned integers, short and full fixed bytes, false, and empty dynamic values.",
+      "typedData": {
+        "types": {
+          "EIP712Domain": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "version",
+              "type": "string"
+            },
+            {
+              "name": "chainId",
+              "type": "uint256"
+            },
+            {
+              "name": "verifyingContract",
+              "type": "address"
+            },
+            {
+              "name": "salt",
+              "type": "bytes32"
+            }
+          ],
+          "Edge": [
+            {
+              "name": "minInt8",
+              "type": "int8"
+            },
+            {
+              "name": "minusOne",
+              "type": "int256"
+            },
+            {
+              "name": "maxUint8",
+              "type": "uint8"
+            },
+            {
+              "name": "maxUint256",
+              "type": "uint256"
+            },
+            {
+              "name": "one",
+              "type": "bytes1"
+            },
+            {
+              "name": "full",
+              "type": "bytes32"
+            },
+            {
+              "name": "no",
+              "type": "bool"
+            },
+            {
+              "name": "nothing",
+              "type": "string"
+            },
+            {
+              "name": "blob",
+              "type": "bytes"
+            }
+          ]
+        },
+        "primaryType": "Edge",
+        "domain": {
+          "name": "Edges",
+          "version": "1",
+          "chainId": 1,
+          "verifyingContract": "0x8888888888888888888888888888888888888888",
+          "salt": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "message": {
+          "minInt8": -128,
+          "minusOne": "-1",
+          "maxUint8": 255,
+          "maxUint256": "115792089237316195423570985008687907853269984665640564039457584007913129639935",
+          "one": "0xab",
+          "full": "0xcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd",
+          "no": false,
+          "nothing": "",
+          "blob": "0x"
+        }
+      },
+      "encodeType": "Edge(int8 minInt8,int256 minusOne,uint8 maxUint8,uint256 maxUint256,bytes1 one,bytes32 full,bool no,string nothing,bytes blob)",
+      "messageHash": "0xfe19cf487f0fcf945ef03b6e3ce966aaf4db732aa231e03ff3dd15b2acf60d20",
+      "domainSeparator": "0xa586e313b90db7f6f19c452bb394a8b5ec14166d35345159e588df4d8dca5220",
+      "digest": "0x21ff34055812bcaa000c9a8e8344a10cb988d2ea0ff820b8d8407f83324ecf80"
+    },
+    "permit2Batch": {
+      "note": "The Uniswap Permit2 PermitBatch structure, the shape abused by approval drainers. The Permit2 domain has no version field.",
+      "typedData": {
+        "types": {
+          "EIP712Domain": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "chainId",
+              "type": "uint256"
+            },
+            {
+              "name": "verifyingContract",
+              "type": "address"
+            }
+          ],
+          "PermitBatch": [
+            {
+              "name": "details",
+              "type": "PermitDetails[]"
+            },
+            {
+              "name": "spender",
+              "type": "address"
+            },
+            {
+              "name": "sigDeadline",
+              "type": "uint256"
+            }
+          ],
+          "PermitDetails": [
+            {
+              "name": "token",
+              "type": "address"
+            },
+            {
+              "name": "amount",
+              "type": "uint160"
+            },
+            {
+              "name": "expiration",
+              "type": "uint48"
+            },
+            {
+              "name": "nonce",
+              "type": "uint48"
+            }
+          ]
+        },
+        "primaryType": "PermitBatch",
+        "domain": {
+          "name": "Permit2",
+          "chainId": 1,
+          "verifyingContract": "0x000000000022d473030f116ddee9f6b43ac78ba3"
+        },
+        "message": {
+          "details": [
+            {
+              "token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+              "amount": "1461501637330902918203684832716283019655932542975",
+              "expiration": 1767225600,
+              "nonce": 0
+            },
+            {
+              "token": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+              "amount": "1000000",
+              "expiration": 1767225600,
+              "nonce": 3
+            }
+          ],
+          "spender": "0x9999999999999999999999999999999999999999",
+          "sigDeadline": "1767225600"
+        }
+      },
+      "encodeType": "PermitBatch(PermitDetails[] details,address spender,uint256 sigDeadline)PermitDetails(address token,uint160 amount,uint48 expiration,uint48 nonce)",
+      "messageHash": "0xe4421099259fc4c1a24f74c3bf9ed3a177ea19f42fc3425d9cc8bbdffba60d86",
+      "domainSeparator": "0x866a5aba21966af95d6c7ab78eb2b2fc913915c28be3b9aa07cc04ff903e3f28",
+      "digest": "0x6dd03871297b1d66f86e469ba2107f0fab8a79e20ea26a8f983545f9a67ce179"
+    }
+  },
+  "recursiveTypeEncoding": {
+    "note": "Inline snapshot from the eth-sig-util encodeType tests. A struct that references itself appears once, as the primary type.",
+    "types": {
+      "Person": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "wallet",
+          "type": "address"
+        }
+      ],
+      "Mail": [
+        {
+          "name": "from",
+          "type": "Person"
+        },
+        {
+          "name": "to",
+          "type": "Person"
+        },
+        {
+          "name": "contents",
+          "type": "string"
+        },
+        {
+          "name": "replyTo",
+          "type": "Mail"
+        }
+      ]
+    },
+    "primaryType": "Mail",
+    "encodeType": "Mail(Person from,Person to,string contents,Mail replyTo)Person(string name,address wallet)"
+  }
+}

@@ -1,0 +1,139 @@
+{
+  "mail": {
+    "source": "https://github.com/ethereum/EIPs/blob/master/assets/eip-712/Example.js. Every expected hash is verbatim. The private key is keccak256 of the ASCII string cow. The expected address is given in its EIP-55 checksum form, and the expected v of 28 is expressed as yParity 1.",
+    "privateKeyPreimage": "cow",
+    "typedData": {
+      "types": {
+        "EIP712Domain": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "type": "string"
+          },
+          {
+            "name": "chainId",
+            "type": "uint256"
+          },
+          {
+            "name": "verifyingContract",
+            "type": "address"
+          }
+        ],
+        "Person": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "wallet",
+            "type": "address"
+          }
+        ],
+        "Mail": [
+          {
+            "name": "from",
+            "type": "Person"
+          },
+          {
+            "name": "to",
+            "type": "Person"
+          },
+          {
+            "name": "contents",
+            "type": "string"
+          }
+        ]
+      },
+      "primaryType": "Mail",
+      "domain": {
+        "name": "Ether Mail",
+        "version": "1",
+        "chainId": 1,
+        "verifyingContract": "0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC"
+      },
+      "message": {
+        "from": {
+          "name": "Cow",
+          "wallet": "0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826"
+        },
+        "to": {
+          "name": "Bob",
+          "wallet": "0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB"
+        },
+        "contents": "Hello, Bob!"
+      }
+    },
+    "encodeType": "Mail(Person from,Person to,string contents)Person(string name,address wallet)",
+    "typeHash": "0xa0cedeb2dc280ba39b857546d74f5549c3a1d7bdc2dd96bf881f76108e23dac2",
+    "encodeData": "0xa0cedeb2dc280ba39b857546d74f5549c3a1d7bdc2dd96bf881f76108e23dac2fc71e5fa27ff56c350aa531bc129ebdf613b772b6604664f5d8dbe21b85eb0c8cd54f074a4af31b4411ff6a60c9719dbd559c221c8ac3492d9d872b041d703d1b5aadf3154a261abdd9086fc627b61efca26ae5702701d05cd2305f7c52a2fc8",
+    "messageHash": "0xc52c0ee5d84264471806290a3f2c4cecfc5490626bf912d01f240d7a274b371e",
+    "domainSeparator": "0xf2cee375fa42b42143804025fc449deafd50cc031ca257e0b194a650a912090f",
+    "digest": "0xbe609aee343fb3c4b28e1df9e632fca64fcfaede20f02e86244efddf30957bd2",
+    "address": "0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826",
+    "signature": {
+      "r": "0x4355c47d63924e8a72e509b65029052eb6c299d53a04e167c5775fd466751c9d",
+      "s": "0x07299936d304c153f6443dfa05f40ff007d72911b6f72307f996231605b91562",
+      "yParity": 1
+    }
+  },
+  "arrays": {
+    "source": "https://github.com/MetaMask/eth-sig-util/blob/main/src/__snapshots__/sign-typed-data.test.ts.snap, V4 snapshots for the tests named custom data type array under encodeData, hashStruct and signTypedData, with the private key from src/sign-typed-data.test.ts. The address 0xDD2a... deliberately carries an invalid EIP-55 checksum in the upstream vector. encodeType is not listed in the snapshot. It is included because its OpenSSL Keccak-256 equals the first 32 bytes of the snapshot encodeData, which is its type hash.",
+    "privateKey": "0x4af1bceebf7f3634ec3cff8a2c38e51178d5d4ce585c52d6043e5e2cc3418bb0",
+    "typedData": {
+      "types": {
+        "EIP712Domain": [],
+        "Person": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "wallet",
+            "type": "address[]"
+          }
+        ],
+        "Mail": [
+          {
+            "name": "from",
+            "type": "Person"
+          },
+          {
+            "name": "to",
+            "type": "Person[]"
+          },
+          {
+            "name": "contents",
+            "type": "string"
+          }
+        ]
+      },
+      "primaryType": "Mail",
+      "domain": {},
+      "message": {
+        "from": {
+          "name": "Cow",
+          "wallet": [
+            "0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826",
+            "0xDD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826"
+          ]
+        },
+        "to": [
+          {
+            "name": "Bob",
+            "wallet": [
+              "0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB"
+            ]
+          }
+        ],
+        "contents": "Hello, Bob!"
+      }
+    },
+    "encodeType": "Mail(Person from,Person[] to,string contents)Person(string name,address[] wallet)",
+    "encodeData": "0x077b2e5169bfc57ed1b6acf858d27ae9b8311db1ccf71df99dfcf9efe8eec43856cacfdc07c6f697bc1bc978cf38559d5c729ed1cd1177e047df929e19dc2a2e8548546251a0cc6d0005e1a792e00f85feed5056e580102ed1afa615f87bb130b5aadf3154a261abdd9086fc627b61efca26ae5702701d05cd2305f7c52a2fc8",
+    "messageHash": "0xac26cc7aa2cb9a8a445fae4e48b33f978b558da9b16e26381c53814d3317f541",
+    "serializedSignature": "0x17c484deba479e3e9f821a6d5defc0179ddf52195c0cd75895c936b3ab4d217c6ba7f1f164a3ac9701e1694a04a13f421fb67ec44cd316846326a98b0d5838a01c"
+  }
+}

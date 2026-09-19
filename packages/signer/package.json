@@ -13,10 +13,13 @@
     }
   },
   "scripts": {
-    "build": "tsc --build"
+    "build": "tsc --build",
+    "test": "tsc -p tsconfig.test.json && node --test 'test/*.test.ts'"
   },
   "dependencies": {
     "@noble/curves": "2.4.0",
-    "@noble/hashes": "2.4.0"
+    "@noble/hashes": "2.4.0",
+    "@scure/bip32": "2.4.0",
+    "@scure/bip39": "2.4.0"
   }
 }

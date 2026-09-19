@@ -1,0 +1,18 @@
+{
+  "source": "Mnemonic is DEFAULT_MNEMONIC in https://github.com/foundry-rs/foundry/blob/master/crates/anvil/src/config.rs. Keys and addresses derived by an independent pure Python BIP-39 and BIP-32 implementation that first passed all 24 Trezor BIP-39 vectors and all 17 BIP-32 vectors, with Keccak-256 from OpenSSL. They match the published Anvil and Hardhat default accounts.",
+  "mnemonic": "test test test test test test test test test test test junk",
+  "accounts": [
+    {
+      "index": 0,
+      "path": "m/44'/60'/0'/0/0",
+      "privateKey": "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80",
+      "address": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    },
+    {
+      "index": 1,
+      "path": "m/44'/60'/0'/0/1",
+      "privateKey": "0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d",
+      "address": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+    }
+  ]
+}

@@ -1,39 +1,39 @@
-export type Hex = `0x${string}`
+import type { Address } from './address.ts'
+import { toBytes, type Hex } from './bytes.ts'
+import { withPrivateKey } from './derivation.ts'
+import { privateKeyToAddress, signDigest, type Signature } from './ecdsa.ts'
+import { hashPersonalMessage } from './personal.ts'
+import { serializeTransaction, transactionSigningHash, type Transaction } from './transaction.ts'
+import { hashTypedData, type TypedData } from './typed-data.ts'
 
-export type Address = Hex
+export type { Address } from './address.ts'
+export type { Hex } from './bytes.ts'
+export type { Signature } from './ecdsa.ts'
+export type { AccessListEntry, Eip1559Transaction, LegacyTransaction, Transaction } from './transaction.ts'
+export type { TypedData, TypedDataField, TypedDataTypes } from './typed-data.ts'
 
-export interface SigningRequest {
-  chainId: number
-  derivationPath: string
-  digest: Hex
+export { derivationPath } from './derivation.ts'
+export { serializeSignature } from './ecdsa.ts'
+export { generateMnemonic, mnemonicToSeed, validateMnemonic } from './mnemonic.ts'
+export { hashPersonalMessage } from './personal.ts'
+export { transactionSigningHash } from './transaction.ts'
+export { hashTypedData } from './typed-data.ts'
+
+export function deriveAddress(seed: Uint8Array, index: number): Address {
+  return withPrivateKey(seed, index, privateKeyToAddress)
 }
 
-export interface Signature {
-  r: Hex
-  s: Hex
-  yParity: 0 | 1
+export function signTransaction(seed: Uint8Array, index: number, transaction: Transaction): Hex {
+  const digest = toBytes(transactionSigningHash(transaction))
+  return withPrivateKey(seed, index, privateKey => serializeTransaction(transaction, signDigest(privateKey, digest)))
 }
 
-export interface VaultParameters {
-  memoryKiB: number
-  iterations: number
-  parallelism: number
+export function signTypedData(seed: Uint8Array, index: number, typedData: TypedData): Signature {
+  const digest = toBytes(hashTypedData(typedData))
+  return withPrivateKey(seed, index, privateKey => signDigest(privateKey, digest))
 }
 
-export const VAULT_PARAMETERS: VaultParameters = {
-  memoryKiB: 65536,
-  iterations: 3,
-  parallelism: 1,
-}
-
-export const MAX_FEE_BASIS_POINTS = 50
-
-export async function sign(request: SigningRequest): Promise<Signature> {
-  void request
-  throw new Error('signer.sign not implemented')
-}
-
-export async function deriveAddress(derivationPath: string): Promise<Address> {
-  void derivationPath
-  throw new Error('signer.deriveAddress not implemented')
+export function signPersonalMessage(seed: Uint8Array, index: number, message: Uint8Array): Signature {
+  const digest = toBytes(hashPersonalMessage(message))
+  return withPrivateKey(seed, index, privateKey => signDigest(privateKey, digest))
 }
