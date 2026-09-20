@@ -14,6 +14,7 @@
     "typecheck": "tsc --build && tsc -p packages/signer/tsconfig.test.json",
     "build": "npm run build --workspaces --if-present",
     "test": "npm run test --workspaces --if-present",
+    "budgets": "node scripts/check-budgets.mjs",
     "benchmark": "node scripts/benchmark-kdf.mjs",
     "clean": "rm -rf packages/*/dist packages/*/*.tsbuildinfo"
   },
